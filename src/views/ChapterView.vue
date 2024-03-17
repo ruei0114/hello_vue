@@ -1,35 +1,125 @@
+<!-- ChapterView.vue -->
+<!-- 請求:題目說明, code -->
+
 <template>
-    <h1>UserID: {{ $route.params.userId }}</h1>
-  
-    <pre>{{ userInfo }}</pre>
-  </template>
-  
-  <script>
-  export default {
-    data() {
-      return {
-        userInfo: {},
+  <div class="chapter-view">
+    <Sidebar />
+    <!-- 左半部 -->
+    <div class="left-pane" :style="{ width: leftPaneWidth + 'px' }">
+      <!-- 左側收起按鈕 -->
+      <button class="collapse-button" @click="toggleLeftPane">
+        {{ leftPaneCollapsed ? '展開' : '收起' }}
+      </button>
+      <!-- 左半部內容 -->
+      <div class="left-content">
+        <!-- 左半部內容 -->
+      </div>
+    </div>
+
+    <!-- 拖曳區域 -->
+    <div class="drag-area" @mousedown="startDrag"></div>
+
+    <!-- 右半部 -->
+    <div class="right-pane">
+      <!-- 上方工具欄 -->
+      <div class="toolbar">
+        <!-- 工具按鈕 -->
+        <button>功能1</button>
+        <button>功能2</button>
+        <!-- 其他工具按鈕 -->
+      </div>
+      <!-- 右半部內容 -->
+      <div class="right-content">
+        <!-- 右半部內容 -->
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+import Sidebar from "../components/Sidebar.vue";
+export default {
+  data() {
+    return {
+      leftPaneWidth: 200, // 左半部寬度
+      leftPaneCollapsed: false, // 左半部是否收起
+      isDragging: false, // 是否正在拖曳
+    };
+  },
+  methods: {
+    // 切換左半部的收起狀態
+    toggleLeftPane() {
+      this.leftPaneCollapsed = !this.leftPaneCollapsed;
+    },
+    // 開始拖曳
+    startDrag(event) {
+      this.isDragging = true;
+      var startX = event.clientX;
+
+      // 監聽滑鼠移動事件
+      const onMouseMove = (event) => {
+        if (this.isDragging) {
+          const deltaX = event.clientX - startX;
+          this.leftPaneWidth += deltaX;
+          startX = event.clientX;
+        }
       };
+
+      // 監聽滑鼠釋放事件
+      const onMouseUp = () => {
+        if (this.isDragging) {
+          this.isDragging = false;
+          document.removeEventListener('mousemove', onMouseMove);
+          document.removeEventListener('mouseup', onMouseUp);
+        }
+      };
+
+      document.addEventListener('mousemove', onMouseMove);
+      document.addEventListener('mouseup', onMouseUp);
     },
-    computed: {
-      userId() {
-        return this.$route.params.userId;
-      },
-    },
-    watch: {
-      userId: async function (val) {
-        this.userInfo = await this.fetchUserInfo(val);
-      },
-    },
-    methods: {
-      async fetchUserInfo(id) {
-        return await fetch("https://jsonplaceholder.typicode.com/users/" + id)
-          .then((response) => response.json())
-          .then((json) => json);
-      },
-    },
-    async created() {
-      this.userInfo = await this.fetchUserInfo(this.userId);
-    },
-  };
-  </script>
+  },
+};
+</script>
+
+<style scoped>
+.chapter-view {
+  display: flex;
+  height: 100%;
+}
+
+.left-pane {
+  flex: none;
+  overflow: hidden;
+  transition: width 0.3s;
+}
+
+.right-pane {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.drag-area {
+  flex: none;
+  width: 5px;
+  cursor: col-resize;
+  background-color: #eee;
+}
+
+.toolbar {
+  padding: 10px;
+  background-color: #ccc;
+}
+
+.left-content, .right-content {
+  /* 左半部和右半部內容區域的樣式 */
+}
+
+.collapse-button {
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  z-index: 100;
+}
+</style>
+../components/SideBar.vue../components/Sidebar.vue
