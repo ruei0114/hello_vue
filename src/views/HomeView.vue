@@ -4,7 +4,7 @@
 <!-- https://simple-code-editor.vicuxd.com/ -->
 <!-- 請求章節狀態(completed, in-progress, not-started) -->
 <template>
-  <div id="app">
+  <div id="home">
     <div class="chapters-container">
       <div
         v-for="(chapterStatus, index) in chapterStatus"
@@ -63,9 +63,9 @@ body {
   margin: 0; /* 移除 body 的預設 margin */
 }
 
-#app {
+#home {
   justify-content: center;
-  height: 100vh; /* 使 #app 充滿整個視窗高度 */
+  height: 100vh; /* 使 #home 充滿整個視窗高度 */
 }
 
 .chapters-container {

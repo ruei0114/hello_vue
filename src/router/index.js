@@ -5,7 +5,7 @@ import ChapterView from '../views/ChapterView.vue'
 export const router = createRouter({
   history: createWebHistory(),
   routes: [
-    {path: '/chapter/:id', component: ChapterView},
     {path: '/', component: HomeView},
+    {path: '/chapter/:id', component: ChapterView},  
   ]
 });
