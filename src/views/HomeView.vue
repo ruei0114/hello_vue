@@ -1,5 +1,7 @@
 <!-- App.vue -->
 <!-- axios -->
+<!-- https://antoniandre.github.io/splitpanes/#do-your-own-style -->
+<!-- https://simple-code-editor.vicuxd.com/ -->
 <!-- 請求章節狀態(completed, in-progress, not-started) -->
 <template>
   <div id="app">

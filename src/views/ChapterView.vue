@@ -5,21 +5,15 @@
   <div class="chapter-view">
     <Sidebar />
     <main>
-      <div class="wrapper">
-        <splitpanes class="default-theme">
-          <pane>
-            <div>{{ i }}</div>
-          </pane>
-          <pane>
-            <div>{{ i }}</div>
-          </pane>
-        </splitpanes>
-        <!-- <div class="description">description</div>
-        <div class="navigation-bar" @mousedown="onMousedown">
-          <div class="navigation-button"></div>
-        </div>
-        <div class="code-view">code</div> -->
-      </div>
+      <splitpanes>
+        <pane>
+          <div></div>
+        </pane>
+        <pane>
+          <div></div>
+        </pane>
+      </splitpanes>
+      <!-- <div class="wrapper"></div> -->
     </main>
   </div>
 </template>
@@ -35,61 +29,18 @@ import "splitpanes/dist/splitpanes.css";
 export default {
   components: { Splitpanes, Pane },
 };
-// export default {
-//   data() {
-//     return {
-//       isDragging: false,
-//       x: 0,
-//       y: 0,
-//       resizer: document.querySelector(".navigation-bar"),
-//       leftSide: resizer.previousElementSibling,
-//       reghtSide: resizer.nextElementSibling,
-//       leftWidth: 0,
-//     };
-//   },
-//   methods: {
-//     onMousedown(e) {
-//       this.isDragging = true;
-//       console.log("mousedown");
-//       // Get the current mouse position
-
-//       this.resizer = e.target;
-//       this.leftSide = resizer.previousElementSibling;
-//       this.rightSide = resizer.nextElementSibling;
-
-//       this.x = e.clientX;
-//       this.leftWidth = this.leftSide.getBoundingClientRect().width;
-//       window.addEventListener("mousemove", this.onMousemove);
-//       window.addEventListener("mouseup", this.onMouseup);
-//     },
-//     onMousemove(e) {
-//       if (this.isDragging) {
-//         console.log("dragging");
-//         // How far the mouse has been moved
-//         const dx = e.clientX - this.x;
-
-//         const newLeftWidth =
-//           ((this.leftWidth + dx) * 100) /
-//           resizer.parentNode.getBoundingClientRect().width;
-//         leftSide.style.width = newLeftWidth + "%";
-//       }
-//     },
-//     onMouseup() {
-//       this.isDragging = false;
-//       window.removeEventListener("mousemove", this.onMousemove);
-//       window.removeEventListener("mouseup", this.onMouseup);
-//     },
-//   },
-
-// };
 </script>
 
-<style scoped>
+<style>
 .splitpanes {
-  background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+  align-items: center;
 }
 
 .splitpanes__pane {
+  background-color: #2f2f2f;
+  height: 97vh;
+  margin-right: 10px;
+  min-width: 300px;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.2) inset;
   justify-content: center;
   align-items: center;
@@ -97,14 +48,15 @@ export default {
 }
 
 .splitpanes--vertical > .splitpanes__splitter {
-  min-width: 6px;
-  background: linear-gradient(90deg, #ccc, #111);
+  min-width: 5px;
+  background: #2f2f2f;
+  height: 10vh;
+  margin-right: 4px;
+  margin-left: -6px;
 }
+</style>
 
-.splitpanes--horizontal > .splitpanes__splitter {
-  min-height: 6px;
-  background: linear-gradient(0deg, #ccc, #111);
-}
+<style scoped>
 .chapter-view {
   display: flex;
   overflow-wrap: break-word;
@@ -136,7 +88,7 @@ export default {
         color: bisque;
       }
 
-      .navigation-bar {
+      /* .navigation-bar {
         display: flex;
         align-items: center;
         cursor: ew-resize;
@@ -149,9 +101,9 @@ export default {
           cursor: ew-resize;
 
           /* &:mousedown {
-          } */
+          } 
         }
-      }
+      } */
 
       .code-view {
         background-color: #2f2f2f;
