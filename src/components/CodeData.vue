@@ -1,16 +1,44 @@
 <template>
     <div>
-        <CodeEditor width="100%" />
+        <button @click="submit">Submit</button>
+        <CodeEditor
+            width="100%"
+            v-model="editorContent"
+            :languages="[['py', 'python']]"
+        />
     </div>
 </template>
 
 <script>
 // import hljs from "highlight.js";
 import CodeEditor from "simple-code-editor";
+import axios from "axios";
 export default {
     components: {
         CodeEditor,
         // hljs,
+    },
+    data() {
+        return {
+            editorContent: "", // 用來儲存CodeEditor的內容
+        };
+    },
+    methods: {
+        async submit() {
+            console.log("Content:", this.editorContent);
+            try {
+                const response = await axios.post(
+                    "http://140.115.214.29:3000/",
+                    {
+                        content: this.editorContent,
+                    }
+                );
+
+                console.log("Response:", response.data);
+            } catch (error) {
+                console.error("Error sending data:", error);
+            }
+        },
     },
 };
 </script>
