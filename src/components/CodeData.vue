@@ -1,6 +1,6 @@
 <template>
     <div>
-        <button @click="submit">Submit</button>
+        <div class="submit" @click="submit">Submit</div>
         <CodeEditor
             width="100%"
             v-model="editorContent"
@@ -74,5 +74,17 @@ export default {
 }
 .code-editor .code-area > textarea::-webkit-scrollbar-corner {
     background-color: #0d1117;
+}
+
+.submit{
+    background-color: #202020;
+    height: 30px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    
+    &:hover {
+        transform: translatey(-0.1rem);
+        cursor: pointer;
+    }
 }
 </style>
