@@ -16,7 +16,8 @@ export default {
                 //https://140.115.214.29:3000
                 // const response = await axios.get("https://randomuser.me/api/");
                 const response = await axios.get(
-                    "http://140.115.214.29:3000/"
+                    // "http://140.115.214.29:3000/"
+                    "https://randomuser.me/api/"
                 );
                 desContent.value = response;
                 console.log("response");

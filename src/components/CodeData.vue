@@ -5,6 +5,7 @@
             width="100%"
             v-model="editorContent"
             :languages="[['py', 'python']]"
+            :line-nums="true"
         />
     </div>
 </template>
@@ -12,15 +13,41 @@
 <script>
 // import hljs from "highlight.js";
 import CodeEditor from "simple-code-editor";
+import { ref, onMounted } from "vue";
 import axios from "axios";
 export default {
     components: {
         CodeEditor,
         // hljs,
     },
-    data() {
+    // data() {
+        
+    //     return {
+    //         editorContent: "console.log(13)", // 用來儲存CodeEditor的內容
+    //     };
+    // },
+    setup() {
+        const editorContent = ref("");
+        
+        // 在 setup 函式外部使用 onMounted 鉤子
+        onMounted(async () => {
+            try {
+                //https://randomuser.me/api/
+                //https://140.115.214.29:3000
+                // const response = await axios.get("https://randomuser.me/api/");
+                const response = await axios.get(
+                    // "http://140.115.214.29:3000/"
+                    "https://randomuser.me/api/"
+                );
+                editorContent.value = JSON.stringify(response, null, 4);
+                console.log("response");
+            } catch (error) {
+                console.error("CodeArea Error fetching data:", error);
+            }
+        });
+
         return {
-            editorContent: "", // 用來儲存CodeEditor的內容
+            editorContent,
         };
     },
     methods: {
@@ -29,8 +56,14 @@ export default {
             try {
                 const response = await axios.post(
                     "http://140.115.214.29:3000/",
+                    // {
+                    //     content: this.editorContent,
+                    // }
+                    this.editorContent,
                     {
-                        content: this.editorContent,
+                        headers: {
+                            'Content-Type': 'text/plain'
+                        }
                     }
                 );
 
@@ -45,15 +78,15 @@ export default {
 
 <style>
 .code-editor .code-area > pre {
-    max-height: 660px;
-    max-width: 850px;
+    max-height: 600px;
+    max-width: 760px;
 }
 .code-editor .code-area > textarea {
     /* background-color: aqua; */
     /* color: black; */
 
-    max-height: 660px;
-    max-width: 850vh;
+    max-height: 650px;
+    max-width: 780px;
     overflow: scroll;
 }
 
