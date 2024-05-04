@@ -13,7 +13,7 @@
         :class="{ 'completed': chapterStatus === 'completed', 'in-progress': chapterStatus === 'in-progress', 'not-started': chapterStatus === 'not-started' }"
         @click="handleChapterClick(index)"
       >
-        chapter {{ index }}
+        chapter {{ index+1 }}
       </div>
     </div>
   </div>
@@ -29,13 +29,8 @@ export default {
         'completed',
         'completed',
         'completed',
+        'completed',
         'in-progress',
-        'not-started',
-        'not-started',
-        'not-started',
-        'not-started',
-        'not-started',
-        'not-started',
         // Add more chapter status as needed
       ],
     };
@@ -50,7 +45,7 @@ export default {
       } else {
         // 跳轉到相應的章節頁面，可以使用 Vue Router 或 window.location.href 等方式
         // alert(`跳轉到 chapter ${index} 的網頁`);
-        this.$router.push(`/chapter/${index}`);
+        this.$router.push(`/chapter/${index+1}`);
       }
     },
   },

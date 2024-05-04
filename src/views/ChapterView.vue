@@ -6,9 +6,19 @@
         <Sidebar />
         <main>
             <splitpanes>
-                <pane>
-                    <h1>Chapter {{ chapterId }}</h1>
-                    <descriptionData />
+                <pane class="left-pane">
+                    <div class="top-bar">
+                        <div style="display: flex;">
+                            <h1 style="margin-right: 20px;">Chapter {{ chapterId }}</h1>
+                            <h1>{{ chapterName[chapterId] }}</h1>
+                        </div>
+                        <div v-show="chapterId<6">
+                            <button @click="showDescriptionComponent" class="Description-btn">Description</button>
+                            <button @click="showAnotherComponent" class="Description-btn">Practice</button>
+                        </div>
+                    </div>
+                    <component :is="currentComponent" />
+                    <!-- 另一個 component -->
                 </pane>
                 <pane>
                     <codeData />
@@ -19,12 +29,35 @@
 </template>
 
 <script setup>
+import { ref } from "vue";
 import { useRoute } from "vue-router";
 import Sidebar from "../components/SideBar.vue";
-import descriptionData from "../components/DescriptionData.vue";
+// import descriptionData from "../components/DescriptionData.vue";
 import codeData from "../components/CodeData.vue";
+import { defineAsyncComponent } from "vue";
+
 const route = useRoute();
 const chapterId = route.params.id;
+const chapterName = ["", "類別", "初始化物件", "封裝", "繼承", "多型", "Bank Practice", "Library Practice"];
+
+// Determine the appropriate DescriptionData component based on chapterId
+
+const descriptionComponent = defineAsyncComponent(() =>
+    import(`../components/DescriptionDatas/DescriptionData${chapterId}.vue`)
+);
+const AnotherComponent = defineAsyncComponent(() =>
+    import(`../components/PracticeDatas/PracticeData${chapterId}.vue`)
+);
+
+const currentComponent = ref(descriptionComponent);
+function showDescriptionComponent() {
+    currentComponent.value = descriptionComponent;
+}
+
+function showAnotherComponent() {
+    // Replace "AnotherComponent" with the appropriate component name
+    currentComponent.value = AnotherComponent;
+}
 </script>
 
 <script>
@@ -36,6 +69,12 @@ export default {
 </script>
 
 <style>
+.top-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
 .splitpanes {
     align-items: center;
 }
@@ -63,8 +102,9 @@ export default {
 
 <style scoped>
 .chapter-view {
-    display: flex;
-    overflow-wrap: break-word;
+    /* 註解調，爆版消失 (overflow)*/
+    /* display: flex;
+    overflow-wrap: break-word; */
 
     main {
         display: flex;
@@ -78,5 +118,23 @@ export default {
             padding-left: 6rem;
         }
     }
+}
+.left-pane {
+    overflow-y: auto; /* 讓左邊的 pane 在 y 方向上能夠捲動 */
+}
+.left-pane::-webkit-scrollbar {
+    width: 5px;
+    height: 5px;
+    cursor: default;
+}
+.left-pane::-webkit-scrollbar-thumb {
+    background-color: #3a4040;
+    cursor: default;
+    border-radius: 5px;
+    opacity: 0.2;
+}
+.Description-btn {
+    background-color: #3a4040;
+    border-bottom: none ;
 }
 </style>

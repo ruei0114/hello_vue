@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class="submit" @click="submit">Submit</div>
+        <button class="submit" @click="submit">Submit</button>
         <CodeEditor
             width="100%"
             v-model="editorContent"
@@ -21,14 +21,14 @@ export default {
         // hljs,
     },
     // data() {
-        
+
     //     return {
     //         editorContent: "console.log(13)", // 用來儲存CodeEditor的內容
     //     };
     // },
     setup() {
         const editorContent = ref("");
-        
+
         // 在 setup 函式外部使用 onMounted 鉤子
         onMounted(async () => {
             try {
@@ -62,8 +62,8 @@ export default {
                     this.editorContent,
                     {
                         headers: {
-                            'Content-Type': 'text/plain'
-                        }
+                            "Content-Type": "text/plain",
+                        },
                     }
                 );
 
@@ -109,12 +109,13 @@ export default {
     background-color: #0d1117;
 }
 
-.submit{
-    background-color: #202020;
+.submit {
+    background-color: #3a4040;
+    border-bottom: none ;
     height: 30px;
     border-radius: 5px;
     margin-bottom: 10px;
-    
+
     &:hover {
         transform: translatey(-0.1rem);
         cursor: pointer;

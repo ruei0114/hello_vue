@@ -35,6 +35,7 @@ const toggleMenu = () => {
 
 <style lang="scss" scoped>
 aside {
+    z-index:99;
     display: flex;
     justify-content: end;
     min-height: 100vh;
@@ -84,6 +85,7 @@ aside {
 
     &.is-expanded {
         width: 300px;
+        z-index: 99;
 
         .chapter-container {
             margin-top: -20rem;
