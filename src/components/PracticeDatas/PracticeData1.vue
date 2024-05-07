@@ -1,15 +1,15 @@
 <template>
     <div>
-        <h2>請參考已存在的程式碼完成類別 car</h2>
-        <h3>請為car 加上以下屬性:</h3>
+        <h2>請參考已存在的程式碼完成類別 Car</h2>
+        <h3>請為Car 加上以下屬性:</h3>
         <ul>
-            <li>座位數(seat)</li>
-            <li>車牌號(plate_number)</li>
+            <li>座位數(seat)(值:2)</li>
+            <li>車牌號(plate_number)(值:8888-nt)</li>
         </ul>
-        <h3>請為car 加上以下方法:</h3>
+        <h3>請為Car 加上以下方法:</h3>
         <ul>
-            <li>加速(accelerate)</li>
-            <li>停止(stop)</li>
+            <li>加速(accelerate):輸出"The car is accelerating!"</li>
+            <li>停止(stop):輸出"The car is stoped."</li>
         </ul>
         <p>
             <CodeEditor

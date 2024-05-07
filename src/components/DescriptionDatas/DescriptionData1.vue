@@ -7,7 +7,13 @@
             透過類別和物件，我們的程式碼更加模組化，易於理解和維護。因為一旦定義了一個類別，就可以創建任意數量的實例，每個物件都具有其獨特的屬性。這種方法不僅提高了開發效率，還增強了軟體的靈活性和可擴充性。
         </p>
         <p>
-            例如，我們可以創建一個名為Animal的類別，它包含屬性如name（名字）和species（物種），以及方法如eat()和sleep()。當我們創建一個Animal類別的物件時，我們可以給予它特定的屬性值，如一隻名叫Nico的狗或一隻名叫Nana的貓。這些物件將擁有Animal類別定義的屬性和方法。
+            例如，我們可以創建一個名為
+            <code>Animal</code> 的類別
+            ，它包含屬性如 <code>name</code> （名字）和
+            <code>species</code> （物種），以及方法如 <code>eat()</code> 和
+            <code>sleep()</code>。當我們創建一個
+            <code>Animal</code>
+            類別的物件時，我們可以給予它特定的屬性值，如一隻名叫 <code>Nico</code> 的狗或一隻名叫 <code>Nana</code> 的貓。這些物件將擁有 <code>Animal</code> 類別定義的屬性和方法。
         </p>
         <p>
             <CodeEditor
@@ -68,4 +74,6 @@ Nana is sleeping.`,
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+code{ color: #a5b8ba; }
+</style>

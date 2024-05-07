@@ -29,14 +29,11 @@
         <p>
             <code>Library</code>:
             <ul>
-                <li><code>add_book(self, book)</code> 將一本書添加到圖書館的收藏中。</li>
-                <li><code>remove_book(self, book)</code> 從圖書館的收藏中移除一本書。</li>
+                <li><code>add_book(self, book)</code> 將一本書添加到 <code>book_list</code> 。</li>
+                <li><code>remove_book(self, book)</code> 從 <code>book_list</code> 移除一本書。</li>
                 <li><code>check_book_status(self, book)</code> 檢查一本書是否可供借閱。</li>
-                <li><code>lend_book(self, book, member)</code> 如果一本書可供借閱，則將其借給一位會員。</li>
-                <li><code>return_book(self, book, member)</code> 允許會員歸還已借閱的書。</li>
-                <li><code>add_member(self, member)</code> 將一位新會員添加到圖書館。</li>
-                <li><code>remove_member(self, member)</code> 從圖書館中移除一位會員。</li>
-                <li><code>check_member_borrow_status(self, member)</code> 顯示一位會員已借閱的書籍清單。<br/>(ex : Jack 借了 {線性代數，工程數學})</li>
+                <li><code>add_member(self, member)</code> 將一位新會員添加到 <code>member_list</code> 。</li>
+                <li><code>remove_member(self, member)</code> 從 <code>member_list</code> 移除一位會員。</li>
             </ul>
         </p>
         <p>
@@ -48,10 +45,11 @@
             </ul>
         </p>
         <p>
-            <code>Library</code>:
+            <code>Member</code>:
             <ul>
                 <li><code>borrow_book(self, book)</code> 如果書籍可供借閱，允許會員借閱一本書。</li>
                 <li><code>return_book(self, book)</code> 允許會員歸還已借閱的書。</li>
+                <li><code>display_borrowed_books(self)</code> 顯示已借閱書籍。<br/>(ex : Jack 借了 {線性代數，工程數學})</li>
             </ul>
         </p>
     </div>

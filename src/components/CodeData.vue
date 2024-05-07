@@ -14,6 +14,7 @@
 // import hljs from "highlight.js";
 import CodeEditor from "simple-code-editor";
 import { ref, onMounted } from "vue";
+import { useRoute } from "vue-router";
 import axios from "axios";
 export default {
     components: {
@@ -28,18 +29,20 @@ export default {
     // },
     setup() {
         const editorContent = ref("");
-
+        const route = useRoute();
         // 在 setup 函式外部使用 onMounted 鉤子
         onMounted(async () => {
             try {
                 //https://randomuser.me/api/
                 //https://140.115.214.29:3000
                 // const response = await axios.get("https://randomuser.me/api/");
+                const chapterId = route.params.id;
                 const response = await axios.get(
-                    // "http://140.115.214.29:3000/"
-                    "https://randomuser.me/api/"
+                    `http://140.115.214.29:3001/chapter${chapterId}`
+                    // "https://randomuser.me/api/"
                 );
-                editorContent.value = JSON.stringify(response, null, 4);
+                // editorContent.value = JSON.stringify(response, null, 4);
+                editorContent.value = response.data;
                 console.log("response");
             } catch (error) {
                 console.error("CodeArea Error fetching data:", error);
@@ -54,8 +57,9 @@ export default {
         async submit() {
             console.log("Content:", this.editorContent);
             try {
+                const chapterId = this.$route.params.id;
                 const response = await axios.post(
-                    "http://140.115.214.29:3000/",
+                    `http://140.115.214.29:3001/chapter${chapterId}`,
                     // {
                     //     content: this.editorContent,
                     // }
@@ -111,7 +115,7 @@ export default {
 
 .submit {
     background-color: #3a4040;
-    border-bottom: none ;
+    border-bottom: none;
     height: 30px;
     border-radius: 5px;
     margin-bottom: 10px;
