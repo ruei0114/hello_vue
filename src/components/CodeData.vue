@@ -28,12 +28,13 @@ import CodeEditor from "simple-code-editor";
 import { ref, onMounted, watch } from "vue";
 import { useRoute } from "vue-router";
 import axios from "axios";
+const if_ac = ref("");
 export default {
-    data() {
-        return {
-            if_ac: "",
-        };
-    },
+    // data() {
+    //     return {
+    //         if_ac: "",
+    //     };
+    // },
     components: {
         CodeEditor,
         // hljs,
@@ -66,6 +67,7 @@ export default {
         watch(() => route.params.id, (newChapterId) => {
             console.log("newChapterId:", newChapterId);
             fetchData(newChapterId);
+            if_ac.value = "";
         });
 
         onMounted(async () => {
@@ -108,6 +110,7 @@ export default {
         });
 
         return {
+            if_ac,
             editorContent,
         };
     },
