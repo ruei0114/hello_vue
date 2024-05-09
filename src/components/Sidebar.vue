@@ -4,7 +4,7 @@
             <div
                 v-for="(chapterStatus, index) in chapterStatus"
                 :key="index"
-                class="chapter-box"
+                class="chapter-choice"
                 :class="{
                     completed: chapterStatus === 'completed',
                     'in-progress': chapterStatus === 'in-progress',
@@ -12,7 +12,7 @@
                 }"
                 @click="handleChapterClick(index)"
             >
-                chapter {{ index }}
+                chapter {{ index+1 }} - {{ chapterName[index+1] }}
             </div>
         </div>
         <div class="menu-toggle-wrap">
@@ -22,6 +22,7 @@
                 >
             </button>
         </div>
+        <!-- <div class="chapter-container"></div> -->
     </aside>
 </template>
 
@@ -30,6 +31,39 @@ import { ref } from "vue";
 const is_expanded = ref(false);
 const toggleMenu = () => {
     is_expanded.value = !is_expanded.value;
+};
+</script>
+
+<script>
+export default {
+    data() {
+        return {
+            chapterStatus: [
+                'completed',
+                'completed',
+                'completed',
+                'completed',
+                'completed',
+                'completed',
+                'in-progress',
+            ],
+            chapterName : ["", "類別", "初始化物件", "封裝", "繼承", "多型", "Bank Practice", "Library Practice"],
+        };
+    },
+    methods: {
+        handleChapterClick(index) {
+            const chapter = this.chapterStatus[index];
+
+            if (chapter === 'not-started') {
+                alert('未達進度 - 提示');
+                // 可以添加其他處理未達進度的邏輯
+            } else {
+                // 跳轉到相應的章節頁面，可以使用 Vue Router 或 window.location.href 等方式
+                // alert(`跳轉到 chapter ${index} 的網頁`);
+                this.$router.push(`/chapter/${index+1}`);
+            }
+        },
+    },
 };
 </script>
 
@@ -48,8 +82,27 @@ aside {
     transition: 0.2s ease-out;
 
     .chapter-container {
-        width: 0;
-        transition: 0.2s ease-out;
+        margin-top: -20rem;
+        margin-left: -20rem;
+        width: 17rem;
+        padding-top: 20rem;
+        padding-left: 20rem;
+        padding-right: 1rem;
+        background-color: #bfb7b7;
+        border-radius: 0.5rem;
+        box-shadow: 0 0 10px 0 #000000;
+    }
+
+    .chapter-choice {
+        width: 100%;
+        height: 5.9rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        font-weight: bold;
+        border-radius: 0.5rem;
+        margin-bottom: 0.5rem;
     }
 
     .menu-toggle-wrap {
@@ -90,16 +143,31 @@ aside {
         .chapter-container {
             margin-top: -20rem;
             margin-left: -20rem;
-            width: 16.5rem;
-            padding: 1rem;
+            width: 17rem;
+            padding-top: 20rem;
+            padding-left: 20rem;
+            padding-right: 1rem;
             background-color: #bfb7b7;
             border-radius: 0.5rem;
             box-shadow: 0 0 10px 0 #000000;
         }
 
+        .chapter-choice {
+            width: 100%;
+            height: 5.9rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-weight: bold;
+            border-radius: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+
         .menu-toggle-wrap {
             justify-content: flex-end;
             .menu-toggle {
+                margin-right: 25px;
                 .material-symbols-outlined {
                     background-color: #545454;
                     border-radius: 5px;

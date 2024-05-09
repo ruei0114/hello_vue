@@ -29,7 +29,7 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
+import { ref, watch } from "vue";
 import { useRoute } from "vue-router";
 import Sidebar from "../components/SideBar.vue";
 // import descriptionData from "../components/DescriptionData.vue";
@@ -37,19 +37,19 @@ import codeData from "../components/CodeData.vue";
 import { defineAsyncComponent } from "vue";
 
 const route = useRoute();
-const chapterId = route.params.id;
+const chapterId = ref(route.params.id);
 const chapterName = ["", "類別", "初始化物件", "封裝", "繼承", "多型", "Bank Practice", "Library Practice"];
 
 // Determine the appropriate DescriptionData component based on chapterId
 
-const descriptionComponent = defineAsyncComponent(() =>
-    import(`../components/DescriptionDatas/DescriptionData${chapterId}.vue`)
+var descriptionComponent = defineAsyncComponent(() =>
+    import(`../components/DescriptionDatas/DescriptionData${chapterId.value}.vue`)
 );
-const AnotherComponent = defineAsyncComponent(() =>
-    import(`../components/PracticeDatas/PracticeData${chapterId}.vue`)
+var AnotherComponent = defineAsyncComponent(() =>
+    import(`../components/PracticeDatas/PracticeData${chapterId.value}.vue`)
 );
 
-const currentComponent = ref(descriptionComponent);
+var currentComponent = ref(descriptionComponent);
 function showDescriptionComponent() {
     currentComponent.value = descriptionComponent;
 }
@@ -58,6 +58,18 @@ function showAnotherComponent() {
     // Replace "AnotherComponent" with the appropriate component name
     currentComponent.value = AnotherComponent;
 }
+
+watch(() => route.params.id, (newChapterId) => {
+    chapterId.value = newChapterId;
+    descriptionComponent = defineAsyncComponent(() =>
+        import(`../components/DescriptionDatas/DescriptionData${chapterId.value}.vue`)
+    );
+    AnotherComponent = defineAsyncComponent(() =>
+        import(`../components/PracticeDatas/PracticeData${chapterId.value}.vue`)
+    );
+    currentComponent = ref(descriptionComponent);
+
+});
 </script>
 
 <script>
@@ -65,6 +77,17 @@ import { Splitpanes, Pane } from "splitpanes";
 import "splitpanes/dist/splitpanes.css";
 export default {
     components: { Splitpanes, Pane },
+    data() {
+        return {
+            chapterId: 0,
+        };
+    },
+    // beforeRouteUpdate(to) {
+    //     // const route = useRoute();
+    //     this.chapterId = to.params.id; 
+    //     console.log(this.chapterId);
+    //     console.log("ChapterView mounted");
+    // }
 };
 </script>
 

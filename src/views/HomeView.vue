@@ -13,7 +13,7 @@
         :class="{ 'completed': chapterStatus === 'completed', 'in-progress': chapterStatus === 'in-progress', 'not-started': chapterStatus === 'not-started' }"
         @click="handleChapterClick(index)"
       >
-        chapter {{ index+1 }}
+        chapter {{ index+1 }} - {{ chapterName[index+1] }}
       </div>
     </div>
   </div>
@@ -33,6 +33,7 @@ export default {
         'in-progress',
         // Add more chapter status as needed
       ],
+      chapterName : ["", "類別", "初始化物件", "封裝", "繼承", "多型", "Bank Practice", "Library Practice"],
     };
   },
   methods: {
