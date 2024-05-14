@@ -8,13 +8,25 @@
             <splitpanes>
                 <pane class="pane-overflow">
                     <div class="top-bar">
-                        <div style="display: flex;">
-                            <h1 style="margin-right: 20px;">Chapter {{ chapterId }}</h1>
+                        <div style="display: flex">
+                            <h1 style="margin-right: 20px">
+                                Chapter {{ chapterId }}
+                            </h1>
                             <h1>{{ chapterName[chapterId] }}</h1>
                         </div>
-                        <div v-show="chapterId<6">
-                            <button @click="showDescriptionComponent" class="Description-btn">Description</button>
-                            <button @click="showAnotherComponent" class="Description-btn">Practice</button>
+                        <div v-show="chapterId < 6">
+                            <button
+                                @click="showDescriptionComponent"
+                                class="Description-btn"
+                            >
+                                Description
+                            </button>
+                            <button
+                                @click="showAnotherComponent"
+                                class="Description-btn"
+                            >
+                                Practice
+                            </button>
                         </div>
                     </div>
                     <component :is="currentComponent" />
@@ -38,12 +50,23 @@ import { defineAsyncComponent } from "vue";
 
 const route = useRoute();
 const chapterId = ref(route.params.id);
-const chapterName = ["", "類別", "初始化物件", "封裝", "繼承", "多型", "Bank Practice", "Library Practice"];
+const chapterName = [
+    "",
+    "類別",
+    "初始化物件",
+    "封裝",
+    "繼承",
+    "多型",
+    "Bank Practice",
+    "Library Practice",
+];
 
 // Determine the appropriate DescriptionData component based on chapterId
 
 var descriptionComponent = defineAsyncComponent(() =>
-    import(`../components/DescriptionDatas/DescriptionData${chapterId.value}.vue`)
+    import(
+        `../components/DescriptionDatas/DescriptionData${chapterId.value}.vue`
+    )
 );
 var AnotherComponent = defineAsyncComponent(() =>
     import(`../components/PracticeDatas/PracticeData${chapterId.value}.vue`)
@@ -59,17 +82,23 @@ function showAnotherComponent() {
     currentComponent.value = AnotherComponent;
 }
 
-watch(() => route.params.id, (newChapterId) => {
-    chapterId.value = newChapterId;
-    descriptionComponent = defineAsyncComponent(() =>
-        import(`../components/DescriptionDatas/DescriptionData${chapterId.value}.vue`)
-    );
-    AnotherComponent = defineAsyncComponent(() =>
-        import(`../components/PracticeDatas/PracticeData${chapterId.value}.vue`)
-    );
-    currentComponent = ref(descriptionComponent);
-
-});
+watch(
+    () => route.params.id,
+    (newChapterId) => {
+        chapterId.value = newChapterId;
+        descriptionComponent = defineAsyncComponent(() =>
+            import(
+                `../components/DescriptionDatas/DescriptionData${chapterId.value}.vue`
+            )
+        );
+        AnotherComponent = defineAsyncComponent(() =>
+            import(
+                `../components/PracticeDatas/PracticeData${chapterId.value}.vue`
+            )
+        );
+        currentComponent = ref(descriptionComponent);
+    }
+);
 </script>
 
 <script>
@@ -84,7 +113,7 @@ export default {
     },
     // beforeRouteUpdate(to) {
     //     // const route = useRoute();
-    //     this.chapterId = to.params.id; 
+    //     this.chapterId = to.params.id;
     //     console.log(this.chapterId);
     //     console.log("ChapterView mounted");
     // }
@@ -163,6 +192,6 @@ export default {
     }
     border-radius: 5px;
     background-color: #3a4040;
-    border-bottom: none ;
+    border-bottom: none;
 }
 </style>

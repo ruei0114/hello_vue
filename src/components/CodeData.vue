@@ -91,8 +91,40 @@ export default {
                         },
                     }
                 );
-                this.if_ac = response.data;
-                console.log("Response:", if_ac.value);
+                const functionError = response.data[0];
+                const dataError = response.data[1];
+                console.log("functionError", functionError);
+                console.log("dataError", dataError);
+                let formattedData = "";
+
+                if (Object.keys(functionError).length > 0) {
+                    formattedData += "Function Error:";
+                    for (
+                        let i = 0;
+                        i < Object.keys(functionError).length;
+                        i += 1
+                    ) {
+                        // Construct the Expected and Actual pair with a blank line in between
+                        formattedData += `\n${functionError[i]}`;
+                    }
+                }
+
+                if (Object.keys(dataError).length > 0) {
+                    if (formattedData !== "") {
+                        formattedData +=
+                            "\n==================================================\n";
+                    }
+                    formattedData += "Data Error:\n";
+                    for (let i = 0; i < Object.keys(dataError).length; i += 2) {
+                        // Construct the Expected and Actual pair with a blank line in between
+                        formattedData += `${dataError[i]}\n${
+                            dataError[i + 1]
+                        }\n\n`;
+                    }
+                }
+
+                this.if_ac = formattedData.trim();
+                // console.log("Response:", data);
             } catch (error) {
                 console.error("Error sending data:", error);
             }
