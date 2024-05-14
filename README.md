@@ -20,5 +20,20 @@ npm run build
 npm run lint
 ```
 
+### Simple CodeEditor
+[Simple CodeEditor for Vue.js 3](https://simple-code-editor.vicuxd.com/)
+```
+npm install highlight.js@11.8.0 --save
+```
+```
+npm install simple-code-editor --save
+```
+
+### Splitpanes
+[Splitpanes](https://antoniandre.github.io/splitpanes/)
+```
+npm i splitpanes
+```
+
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
