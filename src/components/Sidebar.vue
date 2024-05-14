@@ -12,7 +12,7 @@
                 }"
                 @click="handleChapterClick(index)"
             >
-                chapter {{ index+1 }} - {{ chapterName[index+1] }}
+                chapter {{ index + 1 }} - {{ chapterName[index + 1] }}
             </div>
         </div>
         <div class="menu-toggle-wrap">
@@ -39,28 +39,37 @@ export default {
     data() {
         return {
             chapterStatus: [
-                'completed',
-                'completed',
-                'completed',
-                'completed',
-                'completed',
-                'completed',
-                'in-progress',
+                "completed",
+                "completed",
+                "completed",
+                "completed",
+                "completed",
+                "completed",
+                "in-progress",
             ],
-            chapterName : ["", "類別", "初始化物件", "封裝", "繼承", "多型", "Bank Practice", "Library Practice"],
+            chapterName: [
+                "",
+                "類別",
+                "初始化物件",
+                "封裝",
+                "繼承",
+                "多型",
+                "Bank Practice",
+                "Library Practice",
+            ],
         };
     },
     methods: {
         handleChapterClick(index) {
             const chapter = this.chapterStatus[index];
 
-            if (chapter === 'not-started') {
-                alert('未達進度 - 提示');
+            if (chapter === "not-started") {
+                alert("未達進度 - 提示");
                 // 可以添加其他處理未達進度的邏輯
             } else {
                 // 跳轉到相應的章節頁面，可以使用 Vue Router 或 window.location.href 等方式
                 // alert(`跳轉到 chapter ${index} 的網頁`);
-                this.$router.push(`/chapter/${index+1}`);
+                this.$router.push(`/chapter/${index + 1}`);
             }
         },
     },
@@ -69,7 +78,7 @@ export default {
 
 <style lang="scss" scoped>
 aside {
-    z-index:99;
+    z-index: 99;
     display: flex;
     justify-content: end;
     min-height: 100vh;
@@ -162,6 +171,9 @@ aside {
             font-weight: bold;
             border-radius: 0.5rem;
             margin-bottom: 0.5rem;
+            &:hover {
+                transform: translatex(0.1rem);
+            }
         }
 
         .menu-toggle-wrap {

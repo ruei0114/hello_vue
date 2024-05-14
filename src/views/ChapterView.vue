@@ -6,7 +6,7 @@
         <Sidebar />
         <main>
             <splitpanes>
-                <pane class="left-pane">
+                <pane class="pane-overflow">
                     <div class="top-bar">
                         <div style="display: flex;">
                             <h1 style="margin-right: 20px;">Chapter {{ chapterId }}</h1>
@@ -20,7 +20,7 @@
                     <component :is="currentComponent" />
                     <!-- 另一個 component -->
                 </pane>
-                <pane>
+                <pane class="pane-overflow">
                     <codeData />
                 </pane>
             </splitpanes>
@@ -142,21 +142,26 @@ export default {
         }
     }
 }
-.left-pane {
+.pane-overflow {
     overflow-y: auto; /* 讓左邊的 pane 在 y 方向上能夠捲動 */
 }
-.left-pane::-webkit-scrollbar {
+.pane-overflow::-webkit-scrollbar {
     width: 5px;
     height: 5px;
     cursor: default;
 }
-.left-pane::-webkit-scrollbar-thumb {
+.pane-overflow::-webkit-scrollbar-thumb {
     background-color: #3a4040;
     cursor: default;
     border-radius: 5px;
     opacity: 0.2;
 }
 .Description-btn {
+    &:hover {
+        transform: translatey(-0.1rem);
+        cursor: pointer;
+    }
+    border-radius: 5px;
     background-color: #3a4040;
     border-bottom: none ;
 }
