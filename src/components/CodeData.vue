@@ -91,6 +91,11 @@ export default {
                         },
                     }
                 );
+                // console.log("Response:", Array.isArray(response.data));
+                if (!Array.isArray(response.data)) {
+                    this.if_ac = "Passed";
+                    return;
+                }
                 const functionError = response.data[0];
                 const dataError = response.data[1];
                 console.log("functionError", functionError);

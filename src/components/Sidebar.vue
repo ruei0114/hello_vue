@@ -97,7 +97,7 @@ aside {
         padding-top: 20rem;
         padding-left: 20rem;
         padding-right: 1rem;
-        background-color: #bfb7b7;
+        background-color: #656565;
         border-radius: 0.5rem;
         box-shadow: 0 0 10px 0 #000000;
     }
